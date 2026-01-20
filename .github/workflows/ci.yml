@@ -1,0 +1,8 @@
+# instead of using local 'ste-b.env' and 'stg.env' ; 
+# create Github Actions Secrets
+
+env:
+  LOG_DIR: ${{ secrets.LOG_DIR }}
+  ENV: ${{ secrets.ENV }}
+  BROWSER: ${{ secrets.BROWSER }}
+  HEADLESS: ${{ secrets.HEADLESS }}

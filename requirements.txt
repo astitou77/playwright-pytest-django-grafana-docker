@@ -1,1 +1,8 @@
-py
+# Usage :
+# pip install -r ./requirements.txt
+# 
+# use 'pyproject.toml' instead of requirements.txt ?
+
+pytest-playwright
+django
+dotenv
