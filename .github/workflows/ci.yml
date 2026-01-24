@@ -1,8 +1,20 @@
 # instead of using local 'ste-b.env' and 'stg.env' ; 
 # create Github Actions Secrets
 
-env:
-  LOG_DIR: ${{ secrets.LOG_DIR }}
-  ENV: ${{ secrets.ENV }}
-  BROWSER: ${{ secrets.BROWSER }}
-  HEADLESS: ${{ secrets.HEADLESS }}
+
+#env:
+#  LOG_DIR: ${{ secrets.LOG_DIR }}
+#  ENV: ${{ secrets.ENV }}
+#  BROWSER: ${{ secrets.BROWSER }}
+#  HEADLESS: ${{ secrets.HEADLESS }}
+
+## Pytest options examples:
+
+## Run last failed tests only
+# pytest --lf
+
+## Run failures first
+# pytest --ff
+
+## Stop after N failures
+# pytest -x --maxfail=N

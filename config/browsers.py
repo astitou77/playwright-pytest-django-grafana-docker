@@ -1,17 +1,17 @@
 from playwright.sync_api import BrowserType, Playwright
-from config.settings import settings # env. vars : BROWSER, HEADLESS
+from config.settings import settings                            # BROWSER, HEADLESS
 
 def get_browser(playwright: Playwright) -> BrowserType:
-    if BROWSER== "chromium":
+    if settings.BROWSER == "chromium":
         return playwright.chromium
-    if BROWSER== "firefox":
+    if settings.BROWSER == "firefox":
         return playwright.firefox
-    if BROWSER== "webkit":
+    if settings.BROWSER == "webkit":
         return playwright.webkit
-    raise ValueError(f"Unsupported Browser: {BROWSER}")
+    raise ValueError(f"Unsupported Browser: {settings.BROWSER}")
 
 def browser_launch_options():
     return {
-        "headless": HEADLESS,
+        "headless": settings.HEADLESS,
         "slow_mo": 0,
     }
