@@ -2,14 +2,34 @@ import re
 from playwright.sync_api import Playwright, sync_playwright, expect
 import time
 
+from logging import getLogger
+# from config.settings import Settings
+
+# use this to launch the playwright code generator
+# playwright codegen --target python -o tests/recordings/Test_eTA_Smoke
+# await page.pause()
+
+# Use this to run in debug mode
+# PWDEBUG=1 python your_script.py
+
+
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
 
     page.goto("https://eta.onlineservices-servicesenligne-ste.apps.cic.gc.ca/eta/welcome?lang=en")
-    time.
-    expect(page).to_have_title("eService - Immigration, Refugees and Citizenship Canada")
+    
+    # print(f"Navigating to URL: {settings.URLS['ETA_PORTAL_URL']}")
+
+    # getLogger().info(f"Navigating to URL: {settings.URLS['ETA_PORTAL_URL']}")    
+    
+    # page.goto(settings.URLS["ETA_PORTAL_URL"])
+
+    # page.pause()
+
+    # expect(page).to_have_title("eService - Immigration, Refugees and Citizenship Canada")
+    # expect(page.get_by_role("heading", name="Application for an Electronic Travel Authorization (eTA)")).to_be_visible()
 
     page.get_by_label("Are you applying on behalf of").select_option("1")
     page.get_by_role("button", name="Next").click()
@@ -81,11 +101,17 @@ def run(playwright: Playwright) -> None:
     page.get_by_label("Do you have one of these").select_option("3")
     page.get_by_role("checkbox", name="I Agree").check()
     page.get_by_role("textbox", name="* Signature of applicant (").click()
+
     page.get_by_role("textbox", name="* Signature of applicant (").fill("Adnane Stitou")
     page.get_by_role("button", name="Proceed to Payment").click()
+
     page.get_by_role("button", name="Transmit and pay").click()
+
+
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("textbox", name="Email").click()
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("textbox", name="Email").fill("adnane.stitou@cic.gc.ca")
+
+    """
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("textbox", name="Email").press("Tab")
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("textbox", name="Phone Number").fill("819 555-5555")
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("textbox", name="Cardholder Name").click()
@@ -115,6 +141,9 @@ def run(playwright: Playwright) -> None:
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("button", name="Checkout").click()
     page.locator("iframe[title=\"Payment Details\"]").content_frame.get_by_role("button", name="Back").click()
     page.get_by_role("button", name="Transmit and pay").click()
+    """
+
+    # page.goto(settings.URLS["ETA_STATUS_URL"])
 
     # ---------------------
     context.close()
